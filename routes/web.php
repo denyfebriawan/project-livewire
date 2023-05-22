@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserDetailsController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('users.home');
+})->name('home');
 
-Route::get('/home', function () {
-    return view('welcome');
-});
+route::get('/register', function () {
+    return view('users.index');
+})->name('register');
 
-Route::get('/form', function () {
-    return view('livewire.form');
-});
+route::get('/users', function () {
+    return view('users.users');
+})->name('users');
+
+// route::get('/users/{id}', function () {
+//     return view('users.details');
+// })->name('user.details');
+
+Route::get('users/{id}', [UserDetailsController::class, 'show'])->name('user.details');
